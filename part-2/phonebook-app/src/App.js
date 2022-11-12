@@ -24,6 +24,11 @@ const App = () => {
       number: newNumber
     };
 
+    const resetFields = () => {
+      setNewName('');
+      setNewNumber('');
+    };
+
     const findPerson = persons.find(
       (person) => person.name.toLowerCase() === newPerson.name.toLowerCase()
     );
@@ -32,8 +37,7 @@ const App = () => {
       personsService.create(newPerson).then((savedPerson) => {
         setMessage(`Added ${newPerson.name}`);
         setPersons(persons.concat(savedPerson));
-        setNewName('');
-        setNewNumber('');
+        resetFields();
         setTimeout(() => {
           setMessage(null);
         }, 5000);
@@ -52,8 +56,7 @@ const App = () => {
                 p.name !== newPerson.name ? p : updatedPerson
               )
             );
-            setNewName('');
-            setNewNumber('');
+            resetFields();
           });
       }
     }
